@@ -1,15 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { NavLink } from 'react-router-dom';
 
 const Header = () => {
+  const [visible, setVisible] = useState(false);
+
+  const toggleMenu = () => {
+    setVisible(!visible)
+  }
+
   return (
     <>
-      <header className="header" data-header>
+      <header className={`header ${visible ? "active" : ""}`} data-header>
         <div className="container">
           <h1>
             <a href="#" className="logo">Dashboard</a>
           </h1>
 
-          <button className="menu-toggle-btn icon-box" data-menu-toggle-btn>
+          <button className="menu-toggle-btn icon-box" data-menu-toggle-btn onClick={toggleMenu}>
             <span className="material-symbols-rounded icon">menu</span>
           </button>
 
@@ -17,42 +24,42 @@ const Header = () => {
             <div className="container">
               <ul className="navbar-list">
                 <li>
-                  <a href="#" className="navbar-link active icon-box">
+                  <NavLink exact="true" className={({isActive}) => isActive ? 'navbar-link icon-box active' : 'navbar-link icon-box'} to="/">
                     <span className="material-symbols-rounded icon">grid_view</span>
                     <span>Home</span>
-                  </a>
+                  </NavLink>
                 </li>
                 <li>
-                  <a href="#" className="navbar-link icon-box">
+                  <NavLink className={({isActive}) => isActive ? 'navbar-link icon-box active' : 'navbar-link icon-box'} to="/projects">
                     <span className="material-symbols-rounded icon">folder</span>
                     <span>Projects</span>
-                  </a>
+                  </NavLink>
                 </li>
                 <li>
-                  <a href="#" className="navbar-link icon-box">
+                  <NavLink className={`navbar-link icon-box ${window.location.hash === '#tasks' ? 'active' : ''}`} to="/tasks">
                     <span className="material-symbols-rounded icon">list</span>
                     <span>Tasks</span>
-                  </a>
+                  </NavLink>
                 </li>
                 <li>
-                  <a href="#" className="navbar-link icon-box">
+                  <NavLink className={({isActive}) => isActive ? "navbar-link icon-box active" : "navbar-link icon-box"} to="/reports">
                     <span className="material-symbols-rounded icon">bar_chart</span>
                     <span>Reports</span>
-                  </a>
+                  </NavLink>
                 </li>
                 <li>
-                  <a href="#" className="navbar-link icon-box">
+                  <NavLink className={({isActive}) => isActive ? "navbar-link icon-box active" : "navbar-link icon-box"} to="/settings">
                     <span className="material-symbols-rounded icon">settings</span>
                     <span>Settings</span>
-                  </a>
+                  </NavLink>
                 </li>
               </ul>
 
               <ul className="user-action-list">
                 <li>
-                  <a href="#" className="notification icon-box">
+                  <NavLink href="#" className="notification icon-box">
                     <span className="material-symbols-rounded icon">notifications</span>
-                  </a>
+                  </NavLink>
                 </li>
                 <li>
               <a href="#" className="header-profile">
